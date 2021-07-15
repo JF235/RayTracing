@@ -1,24 +1,26 @@
+from Screen import Screen
 import numpy as np
-import matplotlib.pyplot as plt
+from Vector import Vector
+from Ray import Ray
+from ImageGenerator import ImageGenerator
 
-width = 300
-height = 200
+def testImage(imageGenerator):
+    imageGenerator.saveImage('QuadroPreto')
+    imageGenerator.fadeImageRGB()
+    imageGenerator.saveImage('FadeRGB')
 
-camera = np.array([0,0,1])
 
-def normalize(vector):
-    return vector/np.linalg.norm(vector)
+def main():
+    aspRat = 16/9
+    imGen = ImageGenerator(400, int (400/aspRat))
+    origin = Vector(0, 0, 0)
+    posCamera = origin.copy()
 
-ratio = float(width)/height
+    screen = Screen(2, imGen.aspecRatio, 1)
+    screen.getLowerLeft(origin)
 
-screen = [-1, 1/ratio, 1, -1/ratio]
+    imGen.castRay(origin, screen)
+    imGen.saveImage('RayTracing1')
 
-image = np.zeros((height, width, 3))
 
-for i, x in enumerate(np.linspace(screen[0], screen[2], width)):
-    for j, y in enumerate(np.linspace(screen[1], screen[3], height)):
-        pixel = np.array([i/width, j/height, 0])
-        image[j, i] = pixel
-    print(f"{i}/{width}")
-
-plt.imsave("image.png", image)
+main()
