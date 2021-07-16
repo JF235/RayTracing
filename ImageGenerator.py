@@ -9,7 +9,7 @@ class ImageGenerator():
         self.width = width
         self.height = height
         self.image = np.zeros((height, width, 3))
-        self.aspecRatio = height/width
+        self.aspecRatio = width/height
     
     def saveImage(self, imageName):
         plt.imsave(f'Imagens/{imageName}.png', self.image)
@@ -24,7 +24,7 @@ class ImageGenerator():
         self.image[i, j] = pixel
 
 
-    def castRay(self, origin, screen:Screen):
+    def castRay(self, origin, screen:Screen, sphere):
         for i in range(self.height):
             print(f"{i}/{self.height}")
             for j in range(self.width):
@@ -36,5 +36,5 @@ class ImageGenerator():
                 verticalStep = Vector(0, screen.viewPortHeight, 0) * v
                 
                 ray = Ray(origin, screen.lowerLeft + horizontalStep + verticalStep - origin)
-                newPixel = ray.getColor()
+                newPixel = ray.getColor(sphere)
                 self.writePixel(newPixel, i, j)

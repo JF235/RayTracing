@@ -59,3 +59,6 @@ class Vector:
     def copy(self):
         copiedVec = Vector(self.x, self.y, self.z)
         return copiedVec
+
+def dot(u:Vector, v:Vector) -> int:
+    return (u.x * v.x) + (u.y * v.y) + (u.z * v.z)
