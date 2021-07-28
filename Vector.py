@@ -38,6 +38,8 @@ class Vector:
     def __repr__(self):
         return f'[{self.x}  {self.y}  {self.z}]'
     
+    # =======================================================================
+    
     def dot(self, vec):
         return (self.x * vec.x) + (self.y * vec.y) + (self.z * vec.z)
 

@@ -1,9 +1,8 @@
-from Screen import Screen
-import numpy as np
-from Vector import Vector
-from Ray import Ray
-from ImageGenerator import ImageGenerator
-from Sphere import Sphere
+from Screen import *
+from Vector import *
+from Ray import *
+from ImageGenerator import *
+from Sphere import *
 
 def testImage(imageGenerator):
     imageGenerator.saveImage('QuadroPreto')
@@ -18,10 +17,10 @@ def main():
     posCamera = origin.copy()
     sphere = Sphere(0.5, Vector(0,0,-1))
     screen = Screen(2, imGen.aspecRatio, 1)
-    screen.getLowerLeft(origin)
+    screen.calculateLowerLeft(origin)
 
     imGen.castRay(origin, screen, sphere)
-    imGen.saveImage('RayTracing1')
+    imGen.saveImage('RayTracing3')
 
 
 main()
