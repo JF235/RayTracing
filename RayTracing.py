@@ -20,7 +20,7 @@ def main():
     screen.calculateLowerLeft(origin)
 
     imGen.castRay(origin, screen, sphere)
-    imGen.saveImage('RayTracing3')
+    imGen.saveImage('RayTracing4')
 
 
 main()

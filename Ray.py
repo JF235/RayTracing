@@ -2,8 +2,12 @@ from Vector import *
 import numpy as np
 from Sphere import *
 
-class Ray():
-    def __init__(self, source: Vector, direction: Vector):
+class Ray:
+    '''
+    Documentacao de Raio
+    '''
+
+    def __init__(self, source, direction):
         '''
         Inicializa um raio a partir de dois vetores:
 
@@ -22,18 +26,17 @@ class Ray():
         return self.source + t * self.direction
     
     # Retorna a cor com relação a posição atingida
-    def getColor(self, sphere: Sphere) -> np.array:
+    def getColor(self, sphere):
         '''
         É responsável por indicar a cor com relação a posição atingida.
         '''
 
-        menorRaiz = sphere.checkIntersection(self)
+        acertou = sphere.hit(ray = self, hitRecord =  sphere.hitRecord)
         
-        if(menorRaiz > 0):
+        if(acertou):
             # Aqui tem interseccao entao vou colorir a regiao
             # em que esta a esfera
-            N = self.getPoint(menorRaiz) - sphere.center
-            N = N.normalize()
+            N = sphere.hitRecord.normal
             return 0.5 * np.array([N.x + 1, N.y + 1, N.z + 1])
         else:
             direction = self.direction
