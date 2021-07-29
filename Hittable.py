@@ -24,6 +24,27 @@ class Hittable():
     def hit(self, ray, hitRecord, tmin = 0, tmax = np.inf):
         pass
 
-class HittableList():
-    pass
+class HittableList(Hittable):
+    def __init__(self):
+        super().__init__()
+        self.objects = list()
+
+    def append(self, newObject):
+        self.objects.append(newObject)
+    
+    def clear(self):
+        self.objects.clear()
+
+    def hit(self, ray, hitRecord = None, tmin = 0, tmax = np.inf):
+        hitAnything = False
+        closestDist = tmax
+
+        for object in self.objects:
+            if(object.hit(ray, object.hitRecord, tmin, closestDist)):
+                hitAnything = True
+                closestDist = object.hitRecord.t
+                self.hitRecord = object.hitRecord
+        
+        return hitAnything
+
 

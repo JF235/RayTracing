@@ -47,7 +47,7 @@ class ImageGenerator:
         self.image[i, j] = pixel
 
 
-    def castRay(self, origin, screen:Screen, sphere):
+    def castRay(self, origin, screen, hittableList):
         '''
         Para cada pixel na tela,
         '''
@@ -63,5 +63,5 @@ class ImageGenerator:
                 verticalStep = Vector(0, screen.viewPortHeight, 0) * v
                 
                 ray = Ray(source = origin, direction = screen.lowerLeft + horizontalStep + verticalStep - origin)
-                newPixel = ray.getColor(sphere)
+                newPixel = ray.getColor(hittableList)
                 self.writePixel(newPixel, i, j)

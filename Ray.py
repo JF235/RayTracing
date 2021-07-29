@@ -26,17 +26,17 @@ class Ray:
         return self.source + t * self.direction
     
     # Retorna a cor com relação a posição atingida
-    def getColor(self, sphere):
+    def getColor(self, hittableList):
         '''
         É responsável por indicar a cor com relação a posição atingida.
         '''
 
-        acertou = sphere.hit(ray = self, hitRecord =  sphere.hitRecord)
+        acertou = hittableList.hit(ray = self)
         
         if(acertou):
             # Aqui tem interseccao entao vou colorir a regiao
             # em que esta a esfera
-            N = sphere.hitRecord.normal
+            N = hittableList.hitRecord.normal
             return 0.5 * np.array([N.x + 1, N.y + 1, N.z + 1])
         else:
             direction = self.direction
